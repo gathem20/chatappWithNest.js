@@ -13,13 +13,13 @@ export class chatgateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server;
   handleConnection(client: Socket) {
     console.log('new user is connected', client.id);
-    client.broadcast.emit('user is joined', {
+    client.broadcast.emit('user-joined', {
       message: `user joined the chat ${client.id}`,
     });
   }
   handleDisconnect(client: Socket) {
     console.log('user is disconnected', client.id);
-    this.server.emit('user is left', {
+    this.server.emit('user-left', {
       message: `user left the chat ${client.id}`,
     });
   }
@@ -27,7 +27,7 @@ export class chatgateway implements OnGatewayConnection, OnGatewayDisconnect {
   @SubscribeMessage('newMessage')
   HandleNewMessage(@MessageBody() message: string) {
     console.log(message);
-    this.server.emit('replay', message);
+    this.server.emit('message', message);
   }
 }
 

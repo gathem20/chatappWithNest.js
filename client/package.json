@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./dist/app.js",
+    "dev": "nodemon --files ./src/app.ts",
+    "bulid": "tsc -p ."
+  },
+  "dependencies": {
+    "@types/jsdom": "^21.1.7",
+    "@types/socket.io": "^3.0.2",
+    "jsdom": "^24.1.1",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.9"
+  }
+}

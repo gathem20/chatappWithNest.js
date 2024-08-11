@@ -4,15 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>chat app</title>
-    <script defer src="src/app.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4/dist/socket.io.js"></script>
+    <script defer type="module" src="./src/app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/style/output.css"/>
   </head>
-  <body class="m-auto bg-stone-700">
+  <body class="m-auto">
     <div class="flex justify-center h-screen items-end m-auto p-20">
-      <ul id="messages"></ul>
-      <input class="w-screen" type="text" id="message-input" placeholder="type your message" />
-      <button id="send" class="text-blue-50 border-solid border ml-4 ">Send</button>
+      <ul id="messages" class="h-screen w-screen"></ul>
+      <input
+        class="w-screen border text-black border-cyan-950"
+        type="text"
+        id="message-input"
+        placeholder="type your message"
+      />
+      <button id="send" class="text-black border-solid border ml-4">
+        Send
+      </button>
+      <!-- <script>
+        const socket = io("ws://localhost:8000");
+
+        const messages = document.getElementById("messages"); // This works in the browser
+
+        const messageInput = document.getElementById("message-input");
+
+        const sendMessage = document.getElementById("send");
+
+        function addMessage(message, ClassName) {
+          const li = document.createElement("li");
+          li.textContent = message;
+          if (ClassName) {
+            li.classList.add(ClassName);
+          }
+          messages.appendChild(li);
+        }
+
+        socket.on("message", (data) => {
+          addMessage(`${data.username} :${data.message}`);
+        });
+        socket.on("user-joined", (data) => {
+          addMessage(data.message, "joined!");
+        });
+        socket.on("user-left", (data) => {
+          addMessage(data.message, "left");
+        });
+
+        sendMessage.addEventListener("click", () => {
+          const message = messageInput.value.trim();
+          if (message !== "") {
+            console.log(message);
+            socket.emit("newMessage", { message, username: socket.id });
+            messageInput.value = "";
+          }
+          socket.on("connect", () => {
+            addMessage("you have joined!");
+          });
+        });
+      </script> -->
     </div>
   </body>
 </html>

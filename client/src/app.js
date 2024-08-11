@@ -1,20 +1,23 @@
-const io = require("socket.io-client");
-const socket = io("ws://localhost:8000");
-const messages = document.getElementById("messages");
-const messageInput = document.getElementById("message-input");
-const sendMessage = document.getElementById("send");
 
+const socket = io("ws://localhost:8000");
+
+const messages = document.querySelector("#messages"); // This works in the browser
+
+const messageInput = document.getElementById("message-input");
+
+const sendMessage = document.getElementById("send");
+console.log(messages)
 function addMessage(message, ClassName) {
   const li = document.createElement("li");
   li.textContent = message;
   if (ClassName) {
     li.classList.add(ClassName);
   }
-  messages.appendChild(li);
+  messages.append(li);
 }
 
 socket.on("message", (data) => {
-  addMessage(`${data.username} :${data.message}`);
+  addMessage(`${data.username} :${data.message}`, "");
 });
 socket.on("user-joined", (data) => {
   addMessage(data.message, "joined!");
